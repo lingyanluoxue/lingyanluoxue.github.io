@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>lingyanluoxue&#39;s Notes</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-04-25T04:37:20.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>凌言落雪</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>高德地图使用问题汇总</title>
+    <link href="http://yoursite.com/2017/01/09/AMap/"/>
+    <id>http://yoursite.com/2017/01/09/AMap/</id>
+    <published>2017-01-09T02:46:49.000Z</published>
+    <updated>2017-04-25T04:37:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.Marker点击事件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">  // 绑定 Marker 被点击事件</div><div class="line">mAMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() &#123;</div><div class="line">    // marker 对象被点击时回调的接口</div><div class="line">    // 返回 true 则表示接口已响应事件，否则返回false</div><div class="line">    @Override</div><div class="line">    public boolean onMarkerClick(Marker marker) &#123;</div><div class="line">        return false;</div><div class="line">       &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>官方介绍返回true 表示接口已响应事件，表示真的不是很明白到底表达的是什么意思<del>~</del>响应事件又会出现什么情况呢。</p>
+<p>然后鄙人偶尔发现：<br>返回true的时候，Marker点击的时候Infowindow就不显示。<br>返回false的时候，Marker点击的时候Infowindow就会显示。</p>
+<p>2.高德地图的Marker图标显示网络图片<br>  众所周知，高德地图的Marker图标不可以直接设置为网络图标，对于网络图标都是先下载再显示的。然而通过Ion这个库就可以直接显示网络图片，是不是很强大呢。<br>gradle导入：<br>  <code>compile &#39;com.koushikdutta.ion:ion:2.1.9&#39;</code><br>使用方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">      markerOption.icon(BitmapDescriptorFactory.fromBitmap(Ion.with(mContext)</div><div class="line">                      .load(iconPath).asBitmap().get()));</div><div class="line">&#125; catch (InterruptedException e) &#123;</div><div class="line">   e.printStackTrace();</div><div class="line">&#125; catch (ExecutionException e) &#123;</div><div class="line">   e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>3.高德地图聚合Marker<br>  <a href="https://github.com/yipianfengye/android-togetherMap" target="_blank" rel="external">https://github.com/yipianfengye/android-togetherMap</a></p>
+<p>  <a href="https://github.com/lingyanluoxue/AMapMarkerCluster" target="_blank" rel="external">https://github.com/lingyanluoxue/AMapMarkerCluster</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1.Marker点击事件&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;  // 绑定 Marker 被点击事件&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;mAMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // marker 对象被点击时回调的接口&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // 返回 true 则表示接口已响应事件，否则返回false&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    @Override&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    public boolean onMarkerClick(Marker marker) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        return false;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="http://yoursite.com/categories/android/"/>
+    
+    
+      <category term="map" scheme="http://yoursite.com/tags/map/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Markdown</title>
+    <link href="http://yoursite.com/2016/12/22/Markdown/"/>
+    <id>http://yoursite.com/2016/12/22/Markdown/</id>
+    <published>2016-12-22T08:29:48.000Z</published>
+    <updated>2019-01-07T11:38:23.391Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h1><h2 id="Markdown-入门"><a href="#Markdown-入门" class="headerlink" title="Markdown  入门"></a>Markdown  入门</h2><h3 id="Markdown-标题"><a href="#Markdown-标题" class="headerlink" title="Markdown 标题"></a>Markdown 标题</h3><h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><p>1.通过在行首插入 1 到 6 个 # ，来定义对应的 1 到 6 阶 标题。<br>2.利用 = (等号)和 -(减号)可以定义一级标题和二级标题，(任何数量的 = 和 - 都有效果) 。</p>
+<h3 id="Markdown-段落和换行"><a href="#Markdown-段落和换行" class="headerlink" title="Markdown 段落和换行"></a>Markdown 段落和换行</h3><p>第一行：（结尾插入两个以上的空格后再回车）<br>第二行：（上一行结尾存在两个以上空格，段内换行。）相邻第一行，不存在空行，被视为同一段落。</p>
+<p>第三行：两行之间存在空行，视为不同段落</p>
+<p><strong>首行缩进：</strong><br>在开头的时候，先输入下面的代码，然后紧跟着输入文本即可。分号也不要掉</p>
+<ul>
+<li>半方大的空白<code>&amp;ensp;</code>或<code>&amp;#8194;</code></li>
+<li>全方大的空白<code>&amp;emsp;</code>或<code>&amp;#8195;</code></li>
+<li>不断行的空白格<code>&amp;nbsp;</code>或<code>&amp;#160;</code></li>
+</ul>
+<h3 id="Markdown-链接和图片"><a href="#Markdown-链接和图片" class="headerlink" title="Markdown 链接和图片"></a>Markdown 链接和图片</h3><h4 id="Markdown-链接"><a href="#Markdown-链接" class="headerlink" title="Markdown 链接"></a>Markdown 链接</h4><p>写法：<br>[lingyanluoxue Blog](<a href="https://lingyanluoxue.github.io/" target="_blank" rel="external">https://lingyanluoxue.github.io/</a>)<br>[lingyanluoxue GitHub](<a href="https://github.com/lingyanluoxue" target="_blank" rel="external">https://github.com/lingyanluoxue</a>)<br>预览：<br><a href="https://lingyanluoxue.github.io/" target="_blank" rel="external">lingyanluoxue Blog</a><br><a href="https://github.com/lingyanluoxue" target="_blank" rel="external">lingyanluoxue GitHub</a></p>
+<h4 id="Markdown-图片"><a href="#Markdown-图片" class="headerlink" title="Markdown 图片"></a>Markdown 图片</h4><p>写法：<br>![lingyanluoxue avatar](XXX)<br>预览：<br><img src="http://ww3.sinaimg.cn/small/df20b806jw1faklgero6jj202i02ijr9.jpg" alt="lingyanluoxue avatar"></p>
+<h3 id="Markdown-其它"><a href="#Markdown-其它" class="headerlink" title="Markdown 其它"></a>Markdown 其它</h3><p>1.*倾斜*<br>  <em>倾斜</em></p>
+<p>2.**粗体**<br>  <strong>粗体</strong></p>
+<p>3.~~删除线~~<br>  <del>删除线</del></p>
+<p>4.> 引用                    </p>
+<blockquote>
+<p>引用</p>
+</blockquote>
+<p>5.在一行中用三个以上的星号、减号、下划线来建立一个分隔线</p>
+<p>  写法：<br>  1.---<br>  2.***<br>  3.___ </p>
+<p>  对应预览：</p>
+<hr>
+<hr>
+<hr>
+<h3 id="Markdown-代码"><a href="#Markdown-代码" class="headerlink" title="Markdown 代码"></a>Markdown 代码</h3><p>1.单行代码：<br>写法：<br>`hello wordd`<br>预览：<br><code>hello world</code></p>
+<p>2.代码块：<br>写法<br>```java<br>//// 我是注释<br>int a = 5;<br>```<br>预览：<br>​<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 我是注释</span></div><div class="line"><span class="keyword">int</span> a = <span class="number">5</span>;</div><div class="line">​</div></pre></td></tr></table></figure></p>
+<h3 id="Markdown-表格"><a href="#Markdown-表格" class="headerlink" title="Markdown 表格"></a>Markdown 表格</h3><p>写法：<br>|写法|写法居左|写法居中|写法居右|效果|<br>|----|:---|:--:|---:|----|<br>|Markdown表格|Markdown表格|Markdown表格|Markdown表格|Markdown表格|</p>
+<p>预览：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th style="text-align:left">写法居左</th>
+<th style="text-align:center">写法居中</th>
+<th style="text-align:right">写法居右</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Markdown表格</td>
+<td style="text-align:left">Markdown表格</td>
+<td style="text-align:center">Markdown表格</td>
+<td style="text-align:right">Markdown表格</td>
+<td>Markdown表格</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>默认</th>
+<th style="text-align:right">靠右</th>
+<th style="text-align:center">居中</th>
+<th style="text-align:left">靠左</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内容</td>
+<td style="text-align:right">内容</td>
+<td style="text-align:center">内容</td>
+<td style="text-align:left">内容</td>
+</tr>
+<tr>
+<td>内容</td>
+<td style="text-align:right">内容</td>
+<td style="text-align:center">条目</td>
+<td style="text-align:left">内容</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Markdown&quot;&gt;&lt;a href=&quot;#Markdown&quot; class=&quot;headerlink&quot; title=&quot;Markdown&quot;&gt;&lt;/a&gt;Markdown&lt;/h1&gt;&lt;h2 id=&quot;Markdown-入门&quot;&gt;&lt;a href=&quot;#Markdown-入门&quot; class
+    
+    </summary>
+    
+      <category term="node" scheme="http://yoursite.com/categories/node/"/>
+    
+    
+      <category term="Markdown" scheme="http://yoursite.com/tags/Markdown/"/>
+    
+  </entry>
+  
+</feed>
