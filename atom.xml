@@ -49,17 +49,17 @@
     <link href="http://yoursite.com/2016/12/22/Markdown/"/>
     <id>http://yoursite.com/2016/12/22/Markdown/</id>
     <published>2016-12-22T08:29:48.000Z</published>
-    <updated>2019-01-07T11:38:23.391Z</updated>
+    <updated>2019-01-08T03:01:08.425Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h1><h2 id="Markdown-入门"><a href="#Markdown-入门" class="headerlink" title="Markdown  入门"></a>Markdown  入门</h2><h3 id="Markdown-标题"><a href="#Markdown-标题" class="headerlink" title="Markdown 标题"></a>Markdown 标题</h3><h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><p>1.通过在行首插入 1 到 6 个 # ，来定义对应的 1 到 6 阶 标题。<br>2.利用 = (等号)和 -(减号)可以定义一级标题和二级标题，(任何数量的 = 和 - 都有效果) 。</p>
 <h3 id="Markdown-段落和换行"><a href="#Markdown-段落和换行" class="headerlink" title="Markdown 段落和换行"></a>Markdown 段落和换行</h3><p>第一行：（结尾插入两个以上的空格后再回车）<br>第二行：（上一行结尾存在两个以上空格，段内换行。）相邻第一行，不存在空行，被视为同一段落。</p>
 <p>第三行：两行之间存在空行，视为不同段落</p>
 <p><strong>首行缩进：</strong><br>在开头的时候，先输入下面的代码，然后紧跟着输入文本即可。分号也不要掉</p>
-<ul>
+<ol>
 <li>半方大的空白<code>&amp;ensp;</code>或<code>&amp;#8194;</code></li>
 <li>全方大的空白<code>&amp;emsp;</code>或<code>&amp;#8195;</code></li>
 <li>不断行的空白格<code>&amp;nbsp;</code>或<code>&amp;#160;</code></li>
-</ul>
+</ol>
 <h3 id="Markdown-链接和图片"><a href="#Markdown-链接和图片" class="headerlink" title="Markdown 链接和图片"></a>Markdown 链接和图片</h3><h4 id="Markdown-链接"><a href="#Markdown-链接" class="headerlink" title="Markdown 链接"></a>Markdown 链接</h4><p>写法：<br>[lingyanluoxue Blog](<a href="https://lingyanluoxue.github.io/" target="_blank" rel="external">https://lingyanluoxue.github.io/</a>)<br>[lingyanluoxue GitHub](<a href="https://github.com/lingyanluoxue" target="_blank" rel="external">https://github.com/lingyanluoxue</a>)<br>预览：<br><a href="https://lingyanluoxue.github.io/" target="_blank" rel="external">lingyanluoxue Blog</a><br><a href="https://github.com/lingyanluoxue" target="_blank" rel="external">lingyanluoxue GitHub</a></p>
 <h4 id="Markdown-图片"><a href="#Markdown-图片" class="headerlink" title="Markdown 图片"></a>Markdown 图片</h4><p>写法：<br>![lingyanluoxue avatar](XXX)<br>预览：<br><img src="http://ww3.sinaimg.cn/small/df20b806jw1faklgero6jj202i02ijr9.jpg" alt="lingyanluoxue avatar"></p>
 <h3 id="Markdown-其它"><a href="#Markdown-其它" class="headerlink" title="Markdown 其它"></a>Markdown 其它</h3><p>1.*倾斜*<br>  <em>倾斜</em></p>
