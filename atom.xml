@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-25T04:37:20.000Z</updated>
+  <updated>2019-04-10T03:08:31.617Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,228 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>git撤销</title>
+    <link href="http://yoursite.com/2019/04/10/git%E6%92%A4%E9%94%80/"/>
+    <id>http://yoursite.com/2019/04/10/git撤销/</id>
+    <published>2019-04-10T03:07:59.000Z</published>
+    <updated>2019-04-10T03:08:31.617Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="git-撤销工作区的修改"><a href="#git-撤销工作区的修改" class="headerlink" title="git 撤销工作区的修改"></a>git 撤销工作区的修改</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -- &lt;file name&gt;</div></pre></td></tr></table></figure>
+<p>把 <file name=""> 文件在工作区的修改全部撤销，这里有两种情况：  </file></p>
+<ul>
+<li><p>一种是 <file name=""> 文件自内容修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；</file></p>
+</li>
+<li><p>一种是 <file name=""> 文件已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。  </file></p>
+</li>
+</ul>
+<blockquote>
+<p>让 <file name=""> 这个文件回到最近一次 git commit 或 git add 时的状态。</file></p>
+</blockquote>
+<h3 id="git-reset-撤销：版本回退"><a href="#git-reset-撤销：版本回退" class="headerlink" title="git reset 撤销：版本回退"></a>git reset 撤销：版本回退</h3><ul>
+<li><p><strong>git reset –hard &lt;版本号&gt;</strong>  </p>
+<ul>
+<li><p>缓存区和工作目录都不会被改变</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --soft</div></pre></td></tr></table></figure>
+</li>
+<li><p>默认选项。缓存区和你指定的提交同步，但工作目录不受影响</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --mixed</div></pre></td></tr></table></figure>
+</li>
+<li><p>缓存区和工作目录都同步到你指定的提交</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>eg:  </p>
+<ul>
+<li><p>撤销最新的提交，回退到上次提交  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard HEAD^</div></pre></td></tr></table></figure>
+</li>
+<li><p>撤销最新的两次提交，回退到上上次提交  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard HEAD~2</div></pre></td></tr></table></figure>
+</li>
+<li><p>撤销到 commit_id 之前的提交，回退到 commit_id 的提交</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard &lt;版本号&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>git reset –xxx</strong>  </p>
+<ul>
+<li><p>撤销操作时，将你的改动从缓存区中移除，但是这些改动还留在工作目录中 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --mixed HEAD^</div></pre></td></tr></table></figure>
+<ul>
+<li><p>撤销操作时，完全舍弃你的改动 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard HEAD^</div></pre></td></tr></table></figure>
+</li>
+<li><p>撤销操作时，你的改动还保留在你的缓存区和工作目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --soft HEAD^</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://github.com/lingyanluoxue/NoteImgs/raw/master/gitImgs/git_reset.png" alt="git reset"></p>
+</li>
+<li><p><strong>git 撤销已经 push 到远端的 commit</strong>  </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git reset --hard &lt;版本号&gt;  </div><div class="line">// 为了覆盖掉远端的版本信息，使远端的仓库也回退到相应的版本，需要加上参数--force</div><div class="line">git push origin &lt;分支名&gt; --force</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="git-查看历史"><a href="#git-查看历史" class="headerlink" title="git 查看历史"></a>git 查看历史</h3><p><strong>查看提交历史</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 查看提交历史，以便回退到某个版本</div><div class="line">git log</div></pre></td></tr></table></figure></p>
+<p><strong>查看命令历史</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 查看命令历史，以便确定回到未来的某个版本【重返未来】</div><div class="line">git reflog</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;git-撤销工作区的修改&quot;&gt;&lt;a href=&quot;#git-撤销工作区的修改&quot; class=&quot;headerlink&quot; title=&quot;git 撤销工作区的修改&quot;&gt;&lt;/a&gt;git 撤销工作区的修改&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;
+    
+    </summary>
+    
+      <category term="git" scheme="http://yoursite.com/categories/git/"/>
+    
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git 仓库</title>
+    <link href="http://yoursite.com/2019/04/10/git%E4%BB%93%E5%BA%93/"/>
+    <id>http://yoursite.com/2019/04/10/git仓库/</id>
+    <published>2019-04-10T03:06:56.000Z</published>
+    <updated>2019-04-10T03:07:44.490Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="git-初始化"><a href="#git-初始化" class="headerlink" title="git 初始化"></a>git 初始化</h3><ul>
+<li><strong>初始化</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="git-新建-git-仓库，关联远程仓库"><a href="#git-新建-git-仓库，关联远程仓库" class="headerlink" title="git 新建 git 仓库，关联远程仓库"></a>git 新建 git 仓库，关联远程仓库</h3><ul>
+<li><strong>关联远程仓库</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin &lt;url&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="git-重新关联远程仓库"><a href="#git-重新关联远程仓库" class="headerlink" title="git 重新关联远程仓库"></a>git 重新关联远程仓库</h3><ul>
+<li><strong>直接关联/切换远程分支</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote origin set-url &lt;url&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><strong>先解除关联再添加关联远程仓库</strong></p>
+<ul>
+<li><p>解除关联</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote rm origin</div></pre></td></tr></table></figure>
+</li>
+<li><p>关联远程仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin &lt;url&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="git-查看远程仓库"><a href="#git-查看远程仓库" class="headerlink" title="git 查看远程仓库"></a>git 查看远程仓库</h3><ul>
+<li><strong>查看远程仓库</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote -v</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;git-初始化&quot;&gt;&lt;a href=&quot;#git-初始化&quot; class=&quot;headerlink&quot; title=&quot;git 初始化&quot;&gt;&lt;/a&gt;git 初始化&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;初始化&lt;/strong&gt;&lt;figure class=&quot;highlight
+    
+    </summary>
+    
+      <category term="git" scheme="http://yoursite.com/categories/git/"/>
+    
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git 基本用法</title>
+    <link href="http://yoursite.com/2019/04/10/git%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/"/>
+    <id>http://yoursite.com/2019/04/10/git基本用法/</id>
+    <published>2019-04-10T03:05:07.000Z</published>
+    <updated>2019-04-10T03:07:03.146Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><ul>
+<li><p><strong>创建本地分支并切换</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -b xxx</div></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git branch xxx</div><div class="line">git checkout xxx</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="创建远程分支并关联"><a href="#创建远程分支并关联" class="headerlink" title="创建远程分支并关联"></a>创建远程分支并关联</h3><ul>
+<li><p><strong>push本地分支到远程：创建远程分支并关联</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 切换到其他分支</div><div class="line">git push origin xxx:xxx</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建远程分支并关联</strong>  </p>
+<ul>
+<li><p>提交本地分支到远程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin xxx</div></pre></td></tr></table></figure>
+</li>
+<li><p>关联本地分支和远程分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 可以不在当前分支下</div><div class="line">git branch –set-upstream xxx origin/xxx</div></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 当前分支下</div><div class="line">git branch –set-upstream xxx</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="git-删除分支"><a href="#git-删除分支" class="headerlink" title="git 删除分支"></a>git 删除分支</h3><ul>
+<li><p><strong>删除远程分支</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin :xxx</div></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin --delete xxx</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><strong>删除本地分支</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 切换到其他分支</div><div class="line">git branch -d xxx</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><strong>删除本地分支、远程分支</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 切换到其他分支</div><div class="line">git branch -d -r xxx</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="git-查看分支"><a href="#git-查看分支" class="headerlink" title="git 查看分支"></a>git 查看分支</h3><ul>
+<li><strong>列出本地分支</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><strong>查看当前分支</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch -vv</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>列出远程分支</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch -r</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>列出本地分支和远程分支</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch -a</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="git-删除文件"><a href="#git-删除文件" class="headerlink" title="git 删除文件"></a>git 删除文件</h3><p>情景：<br>对于创建的文件到 git 并提交，发现无用手动删除文件</p>
+<ul>
+<li><p><strong>git 删除文件并提交</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git rm &lt;file name&gt;</div><div class="line">git commit -m &quot;&lt;commit description&gt;&quot;</div></pre></td></tr></table></figure>
+<p> or【等价】</p>
+</li>
+<li><p><strong>git 添加改动并提交</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add &lt;file name&gt;</div><div class="line">git commit -m &quot;&lt;commit description&gt;&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;创建分支&quot;&gt;&lt;a href=&quot;#创建分支&quot; class=&quot;headerlink&quot; title=&quot;创建分支&quot;&gt;&lt;/a&gt;创建分支&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建本地分支并切换&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlig
+    
+    </summary>
+    
+      <category term="git" scheme="http://yoursite.com/categories/git/"/>
+    
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>高德地图使用问题汇总</title>

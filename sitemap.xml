@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/04/10/git%E6%92%A4%E9%94%80/</loc>
+    
+    <lastmod>2019-04-10T03:08:31.617Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/04/10/git%E4%BB%93%E5%BA%93/</loc>
+    
+    <lastmod>2019-04-10T03:07:44.490Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/04/10/git%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</loc>
+    
+    <lastmod>2019-04-10T03:07:03.146Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/12/22/Markdown/</loc>
     
     <lastmod>2019-01-08T03:21:37.018Z</lastmod>

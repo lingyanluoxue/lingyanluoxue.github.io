@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title><![CDATA[git撤销]]></title>
+      <url>%2F2019%2F04%2F10%2Fgit%E6%92%A4%E9%94%80%2F</url>
+      <content type="text"><![CDATA[git 撤销工作区的修改1git checkout -- &lt;file name&gt; 把 文件在工作区的修改全部撤销，这里有两种情况： 一种是 文件自内容修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态； 一种是 文件已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。 让 这个文件回到最近一次 git commit 或 git add 时的状态。 git reset 撤销：版本回退 git reset –hard &lt;版本号&gt; 缓存区和工作目录都不会被改变 1git reset --soft 默认选项。缓存区和你指定的提交同步，但工作目录不受影响 1git reset --mixed 缓存区和工作目录都同步到你指定的提交 1git reset --hard eg: 撤销最新的提交，回退到上次提交 1git reset --hard HEAD^ 撤销最新的两次提交，回退到上上次提交 1git reset --hard HEAD~2 撤销到 commit_id 之前的提交，回退到 commit_id 的提交 1git reset --hard &lt;版本号&gt; git reset –xxx 撤销操作时，将你的改动从缓存区中移除，但是这些改动还留在工作目录中 1git reset --mixed HEAD^ 撤销操作时，完全舍弃你的改动 1git reset --hard HEAD^ 撤销操作时，你的改动还保留在你的缓存区和工作目录 1git reset --soft HEAD^ git 撤销已经 push 到远端的 commit 123git reset --hard &lt;版本号&gt; // 为了覆盖掉远端的版本信息，使远端的仓库也回退到相应的版本，需要加上参数--forcegit push origin &lt;分支名&gt; --force git 查看历史查看提交历史12// 查看提交历史，以便回退到某个版本git log 查看命令历史12// 查看命令历史，以便确定回到未来的某个版本【重返未来】git reflog]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[git 仓库]]></title>
+      <url>%2F2019%2F04%2F10%2Fgit%E4%BB%93%E5%BA%93%2F</url>
+      <content type="text"><![CDATA[git 初始化 初始化1git init git 新建 git 仓库，关联远程仓库 关联远程仓库1git remote add origin &lt;url&gt; git 重新关联远程仓库 直接关联/切换远程分支1git remote origin set-url &lt;url&gt; 先解除关联再添加关联远程仓库 解除关联 1git remote rm origin 关联远程仓库 1git remote add origin &lt;url&gt; git 查看远程仓库 查看远程仓库1git remote -v]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[git 基本用法]]></title>
+      <url>%2F2019%2F04%2F10%2Fgit%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95%2F</url>
+      <content type="text"><![CDATA[创建分支 创建本地分支并切换 1git checkout -b xxx or 12git branch xxxgit checkout xxx 创建远程分支并关联 push本地分支到远程：创建远程分支并关联 12// 切换到其他分支git push origin xxx:xxx 创建远程分支并关联 提交本地分支到远程 1git push origin xxx 关联本地分支和远程分支 12// 可以不在当前分支下git branch –set-upstream xxx origin/xxx or 12// 当前分支下git branch –set-upstream xxx git 删除分支 删除远程分支 1git push origin :xxx or 1git push origin --delete xxx 删除本地分支12// 切换到其他分支git branch -d xxx 删除本地分支、远程分支12// 切换到其他分支git branch -d -r xxx git 查看分支 列出本地分支1git branch 查看当前分支 1git branch -vv 列出远程分支 1git branch -r 列出本地分支和远程分支 1git branch -a git 删除文件情景：对于创建的文件到 git 并提交，发现无用手动删除文件 git 删除文件并提交 12git rm &lt;file name&gt;git commit -m &quot;&lt;commit description&gt;&quot; or【等价】 git 添加改动并提交 12git add &lt;file name&gt;git commit -m &quot;&lt;commit description&gt;&quot;]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[高德地图使用问题汇总]]></title>
       <url>%2F2017%2F01%2F09%2FAMap%2F</url>
       <content type="text"><![CDATA[1.Marker点击事件123456789 // 绑定 Marker 被点击事件mAMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() &#123; // marker 对象被点击时回调的接口 // 返回 true 则表示接口已响应事件，否则返回false @Override public boolean onMarkerClick(Marker marker) &#123; return false; &#125;&#125;); 官方介绍返回true 表示接口已响应事件，表示真的不是很明白到底表达的是什么意思~响应事件又会出现什么情况呢。 然后鄙人偶尔发现：返回true的时候，Marker点击的时候Infowindow就不显示。返回false的时候，Marker点击的时候Infowindow就会显示。 2.高德地图的Marker图标显示网络图片 众所周知，高德地图的Marker图标不可以直接设置为网络图标，对于网络图标都是先下载再显示的。然而通过Ion这个库就可以直接显示网络图片，是不是很强大呢。gradle导入： compile &#39;com.koushikdutta.ion:ion:2.1.9&#39;使用方法：12345678try &#123; markerOption.icon(BitmapDescriptorFactory.fromBitmap(Ion.with(mContext) .load(iconPath).asBitmap().get()));&#125; catch (InterruptedException e) &#123; e.printStackTrace();&#125; catch (ExecutionException e) &#123; e.printStackTrace();&#125; 3.高德地图聚合Marker https://github.com/yipianfengye/android-togetherMap https://github.com/lingyanluoxue/AMapMarkerCluster]]></content>
